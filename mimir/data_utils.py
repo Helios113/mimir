@@ -116,6 +116,8 @@ class Data:
             )
             return data
         else:
+            print(self.name)
+            print(custom_datasets.DATASETS)
             if self.presampled or self.config.full_doc:
                 print("using presampled data")
                 data = datasets.load_dataset(
@@ -125,7 +127,7 @@ class Data:
                     cache_dir=self.cache_dir,
                 )[self.key]
             elif self.name in custom_datasets.DATASETS:
-                data = custom_datasets.load(self.name)
+                data = custom_datasets.load(self.name, "")
             elif self.name == "the_pile":
                 min_load = max(10000, self.config.max_data)
                 data = datasets.load_dataset(
@@ -165,9 +167,12 @@ class Data:
             # then generate n_samples samples
             wsp_tokenizer = WhitespaceTokenizer()
 
-            # remove duplicates from the data
-            data = list(dict.fromkeys(data))  # deterministic, as opposed to set()
-
+            # # remove duplicates from the data
+            # data = list(dict.fromkeys(data))  # deterministic, as opposed to set()
+            x= data[0]
+            print(x)
+            print(wsp_tokenizer.span_tokenize(x))
+            # exit()
             whitespace_tokenized_spans = [
                 (x, list(wsp_tokenizer.span_tokenize(x))) for x in data
             ]
@@ -197,7 +202,7 @@ class Data:
                 ]
                 if len(data) == 0:
                     raise ValueError("No examples with length < max_words")
-
+            # exit()
             # TODO: why shuffle
             # random.seed(0)
             # random.shuffle(data)

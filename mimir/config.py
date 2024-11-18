@@ -80,7 +80,7 @@ class EnvironmentConfig(Serializable):
     """Device (GPU) to load main model on"""
     device_map: Optional[str] = None
     """Configuration for device map if needing to split model across gpus"""
-    device_aux: Optional[str] = "cuda:1"
+    device_aux: Optional[str] = "cuda:0"
     """Device (GPU) to load any auxiliary model(s) on"""
     compile: Optional[bool] = True
     """Compile models?"""

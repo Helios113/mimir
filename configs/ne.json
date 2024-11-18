@@ -1,8 +1,9 @@
 {
     "experiment_name": "neo125_github_experiment_ne",
     "base_model": "EleutherAI/gpt-neo-125m",
-    "dataset_member": "the_pile",
-    "dataset_nonmember": "the_pile",
+    "dataset_key": "question",
+    "dataset_member": "medpaca",
+    "dataset_nonmember": "medpaca",
     "min_words": 100,
     "max_words": 200,
     "max_tokens": 512,
@@ -26,7 +27,7 @@
         "pct_words_masked": 0.3,
         "span_length": 2,
         "dump_cache": false,
-        "load_from_cache": true,
+        "load_from_cache": false,
         "neighbor_strategy": "random"
     },
     "env_config": {
@@ -34,5 +35,6 @@
         "device_map": "balanced_low_0"
     },
     "dump_cache": false,
-    "load_from_cache": true
+    "load_from_cache": false,
+    "load_from_hf":false
 }

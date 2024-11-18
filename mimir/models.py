@@ -12,7 +12,7 @@ from collections import defaultdict
 from multiprocessing.pool import ThreadPool
 import torch.nn.functional as F
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
-from hf_olmo import *
+# from hf_olmo import *
 
 from mimir.config import ExperimentConfig
 from mimir.custom_datasets import SEPARATOR
@@ -180,7 +180,7 @@ class Model(nn.Module):
                 # TODO: This should be smth specified in config in case user has
                 # llama is too big, gotta use device map
                 model = transformers.AutoModelForCausalLM.from_pretrained(self.name, **model_kwargs, device_map="balanced_low_0", cache_dir=self.cache_dir)
-                self.device = 'cuda:1'
+                self.device = 'cuda:0'
             elif "stablelm" in self.name.lower():  # models requiring custom code
                 model = transformers.AutoModelForCausalLM.from_pretrained(
                     self.name, **model_kwargs, trust_remote_code=True, device_map=device_map, cache_dir=self.cache_dir)
