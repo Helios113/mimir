@@ -7,9 +7,13 @@
 #SBATCH --output=%x-%j.out
 #SBATCH --time=10:00:00
 
+#cd /nfs-share/mk2296/projects/llm_memorisation/mia/mimir
+#source $(poetry env info --path)/bin/activate
+
+export MIMIR_DATA_SOURCE="/nfs-share/mk2296/llm_memorisation/mia/mimir/source"
+export export MIMIR_CACHE_PATH="nfs-share/mk2296/llm_memorisation/mia/mimir/cache"
+
+export HF_TOKEN=$(cat /nfs-share/mk2296/.huggingface_token)
 
 
-export MIMIR_DATA_SOURCE="/nfs-share/pa511/llm_memorisation/mia/mimir/source"
-export export MIMIR_CACHE_PATH="nfs-share/pa511/llm_memorisation/mia/mimir/cache"
-
-poetry run python run.py --config configs/ne.json
+poetry run python run.py --config configs/mi.json
