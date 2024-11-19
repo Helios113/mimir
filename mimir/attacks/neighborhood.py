@@ -395,6 +395,8 @@ class BertModel(MaskFillingModel):
             )
         else:
             raise ValueError(f"Invalid model name {self.name}")
+        
+        self.model.to(self.device)
 
     def generate_neighbors(self, texts, **kwargs) -> List[str]:
         neighbors = []
@@ -427,6 +429,8 @@ class BertModel(MaskFillingModel):
         for target_token_index in target_token_indices:
             target_token = text_tokenized[0, target_token_index]
             if self.name == "bert":
+                #print(f"text_tokenized device: {text_tokenized.device}")
+                #print(f"self.model.bert.embeddings device: {self.model.bert.embeddings}")
                 embeds = self.model.bert.embeddings(text_tokenized)
             elif self.name == "distilbert":
                 embeds = self.model.distilbert.embeddings(text_tokenized)
