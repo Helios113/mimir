@@ -1,0 +1,33 @@
+BertForMaskedLM has generative capabilities, as `prepare_inputs_for_generation` is explicitly overwritten. However, it doesn't directly inherit from `GenerationMixin`. From 👉v4.50👈 onwards, `PreTrainedModel` will NOT inherit from `GenerationMixin`, and this model will lose the ability to call `generate` and other related functions.
+  - If you're using `trust_remote_code=True`, you can get rid of this warning by loading the model with an auto class. See https://huggingface.co/docs/transformers/en/model_doc/auto#auto-classes
+  - If you are the owner of the model architecture code, please modify your model class such that it inherits from `GenerationMixin` (after `PreTrainedModel`, otherwise you'll get an exception).
+  - If you are not the owner of the model architecture class, please contact the model code owner to update it.
+Some weights of the model checkpoint at bert-base-uncased were not used when initializing BertForMaskedLM: ['bert.pooler.dense.bias', 'bert.pooler.dense.weight', 'cls.seq_relationship.bias', 'cls.seq_relationship.weight']
+- This IS expected if you are initializing BertForMaskedLM from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing BertForMaskedLM from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+results_new/neo125_github_experiment/EleutherAI_gpt-neo-125m/github_ngram_13_<0.8_truncated
+Saving results to absolute path: /nfs-share/mk2296/projects/llm_memorisation/mia/mimir/tmp_results/neo125_github_experiment/EleutherAI_gpt-neo-125m/github_ngram_13_<0.8_truncated
+LOG: cache_dir is nfs-share/mk2296/llm_memorisation/mia/mimir/cache
+Using cache dir nfs-share/mk2296/llm_memorisation/mia/mimir/cache
+Loading BASE model EleutherAI/gpt-neo-125m...
+Loading mask filling model bert...
+MOVING BASE MODEL TO GPU...DONE (2.57s)
+Loading dataset the_pile...
+Loading from HuggingFace!
+Generating ngram_7_0.2 split: 0 examples [00:00, ? examples/s]Generating ngram_7_0.2 split: 66 examples [00:00, 648.84 examples/s]Generating ngram_7_0.2 split: 133 examples [00:00, 655.37 examples/s]Generating ngram_7_0.2 split: 202 examples [00:00, 666.41 examples/s]Generating ngram_7_0.2 split: 268 examples [00:00, 552.78 examples/s]
+Generating ngram_13_0.2 split: 0 examples [00:00, ? examples/s]Generating ngram_13_0.2 split: 66 examples [00:00, 647.28 examples/s]Generating ngram_13_0.2 split: 133 examples [00:00, 654.60 examples/s]Generating ngram_13_0.2 split: 200 examples [00:00, 657.63 examples/s]Generating ngram_13_0.2 split: 299 examples [00:00, 654.89 examples/s]Generating ngram_13_0.2 split: 394 examples [00:00, 639.95 examples/s]Generating ngram_13_0.2 split: 459 examples [00:00, 638.29 examples/s]Generating ngram_13_0.2 split: 523 examples [00:00, 636.05 examples/s]Generating ngram_13_0.2 split: 587 examples [00:00, 634.29 examples/s]Generating ngram_13_0.2 split: 683 examples [00:01, 633.56 examples/s]Generating ngram_13_0.2 split: 740 examples [00:01, 539.15 examples/s]
+Generating ngram_13_0.8 split: 0 examples [00:00, ? examples/s]Generating ngram_13_0.8 split: 66 examples [00:00, 647.30 examples/s]Generating ngram_13_0.8 split: 132 examples [00:00, 647.85 examples/s]Generating ngram_13_0.8 split: 201 examples [00:00, 663.36 examples/s]Generating ngram_13_0.8 split: 300 examples [00:00, 656.60 examples/s]Generating ngram_13_0.8 split: 366 examples [00:00, 654.99 examples/s]Generating ngram_13_0.8 split: 433 examples [00:00, 657.80 examples/s]Generating ngram_13_0.8 split: 531 examples [00:00, 650.34 examples/s]Generating ngram_13_0.8 split: 598 examples [00:00, 652.82 examples/s]Generating ngram_13_0.8 split: 664 examples [00:01, 653.57 examples/s]Generating ngram_13_0.8 split: 762 examples [00:01, 652.00 examples/s]Generating ngram_13_0.8 split: 829 examples [00:01, 655.23 examples/s]Generating ngram_13_0.8 split: 896 examples [00:01, 656.00 examples/s]Generating ngram_13_0.8 split: 991 examples [00:01, 645.57 examples/s]Generating ngram_13_0.8 split: 1000 examples [00:01, 545.65 examples/s]
+Loading dataset the_pile...
+Loading from HuggingFace!
+Generating samples:   0%|          | 0/21 [00:00<?, ?it/s]Generating samples: 100%|██████████| 21/21 [00:00<00:00, 899.16it/s]
+Loading from HuggingFace!
+Loading from HuggingFace!
+NEW N_SAMPLES IS  1000
+Writing raw data to tmp_results/neo125_github_experiment/EleutherAI_gpt-neo-125m/github_ngram_13_<0.8_truncated/raw_data.json
+Writing raw data to tmp_results/neo125_github_experiment/EleutherAI_gpt-neo-125m/github_ngram_13_<0.8_truncated/raw_data_lens.json
+Loaded neighbors from cache!
+Computing criterion:   0%|          | 0/20 [00:00<?, ?it/s]MOVING MASK MODEL TO GPU.../nfs-share/mk2296/poetry/Cache/virtualenvs/mimir-Sp_lKhLC-py3.12/lib/python3.12/site-packages/numpy/_core/fromnumeric.py:3904: RuntimeWarning: Mean of empty slice.
+  return _methods._mean(a, axis=axis, dtype=dtype,
+/nfs-share/mk2296/poetry/Cache/virtualenvs/mimir-Sp_lKhLC-py3.12/lib/python3.12/site-packages/numpy/_core/_methods.py:147: RuntimeWarning: invalid value encountered in scalar divide
+  ret = ret.dtype.type(ret / rcount)
+Computing criterion:   5%|▌         | 1/20 [1:24:18<26:41:47, 5058.26s/it]Computing criterion:  10%|█         | 2/20 [2:50:22<25:36:10, 5120.59s/it]Computing criterion:  15%|█▌        | 3/20 [4:10:56<23:33:43, 4989.63s/it]Computing criterion:  20%|██        | 4/20 [5:31:19<21:53:03, 4923.98s/it]Computing criterion:  25%|██▌       | 5/20 [6:55:45<20:43:48, 4975.22s/it]Computing criterion:  30%|███       | 6/20 [8:13:43<18:57:19, 4874.27s/it]Computing criterion:  35%|███▌      | 7/20 [9:35:27<17:38:09, 4883.77s/it]slurmstepd: error: *** JOB 14469 ON mauao CANCELLED AT 2024-11-18T23:39:47 DUE TO TIME LIMIT ***

@@ -1,0 +1,30 @@
+results_new/neo125_github_experiment/EleutherAI_gpt-neo-125m/github_ngram_13_<0.8_truncated
+Saving results to absolute path: /nfs-share/mk2296/projects/llm_memorisation/mia/mimir/tmp_results/neo125_github_experiment/EleutherAI_gpt-neo-125m/github_ngram_13_<0.8_truncated
+LOG: cache_dir is nfs-share/mk2296/llm_memorisation/mia/mimir/cache
+Using cache dir nfs-share/mk2296/llm_memorisation/mia/mimir/cache
+Loading BASE model EleutherAI/gpt-neo-125m...
+MOVING BASE MODEL TO GPU...DONE (2.97s)
+Loading dataset medpaca...
+medpaca
+['writing', 'english', 'german', 'pubmed', 'medpaca']
+What is the priority during fasting and starvation in terms of supplying glucose and preserving protein, and which organs are prioritized for glucose supply? During fasting and starvation, the priority is to supply sufficient glucose to the brain and RBCs while preserving protein.
+<generator object RegexpTokenizer.span_tokenize at 0x7f5d517314e0>
+Total number of samples: 1143
+Average number of words: 130.93350831146105
+Loading dataset medpaca...
+medpaca
+['writing', 'english', 'german', 'pubmed', 'medpaca']
+What is the priority during fasting and starvation in terms of supplying glucose and preserving protein, and which organs are prioritized for glucose supply? During fasting and starvation, the priority is to supply sufficient glucose to the brain and RBCs while preserving protein.
+<generator object RegexpTokenizer.span_tokenize at 0x7f5d51730c70>
+Total number of samples: 1143
+Average number of words: 130.93350831146105
+Generating samples:   0%|          | 0/21 [00:00<?, ?it/s]Generating samples: 100%|██████████| 21/21 [00:00<00:00, 1139.00it/s]
+NEW N_SAMPLES IS  1000
+Writing raw data to tmp_results/neo125_github_experiment/EleutherAI_gpt-neo-125m/github_ngram_13_<0.8_truncated/raw_data.json
+Writing raw data to tmp_results/neo125_github_experiment/EleutherAI_gpt-neo-125m/github_ngram_13_<0.8_truncated/raw_data_lens.json
+Computing criterion:   0%|          | 0/20 [00:00<?, ?it/s]Computing criterion:   5%|▌         | 1/20 [00:04<01:32,  4.88s/it]Computing criterion:  10%|█         | 2/20 [00:08<01:10,  3.91s/it]Computing criterion:  15%|█▌        | 3/20 [00:11<00:59,  3.50s/it]Computing criterion:  20%|██        | 4/20 [00:14<00:52,  3.30s/it]Computing criterion:  25%|██▌       | 5/20 [00:16<00:44,  2.96s/it]Computing criterion:  30%|███       | 6/20 [00:19<00:39,  2.82s/it]Computing criterion:  35%|███▌      | 7/20 [00:21<00:33,  2.61s/it]Computing criterion:  40%|████      | 8/20 [00:23<00:30,  2.50s/it]Computing criterion:  45%|████▌     | 9/20 [00:25<00:26,  2.41s/it]Computing criterion:  50%|█████     | 10/20 [00:27<00:23,  2.31s/it]Computing criterion:  55%|█████▌    | 11/20 [00:29<00:20,  2.24s/it]Computing criterion:  60%|██████    | 12/20 [00:32<00:18,  2.25s/it]Computing criterion:  65%|██████▌   | 13/20 [00:34<00:15,  2.21s/it]Computing criterion:  70%|███████   | 14/20 [00:36<00:13,  2.19s/it]Computing criterion:  75%|███████▌  | 15/20 [00:38<00:11,  2.21s/it]Computing criterion:  80%|████████  | 16/20 [00:40<00:08,  2.11s/it]Computing criterion:  85%|████████▌ | 17/20 [00:42<00:06,  2.05s/it]Computing criterion:  90%|█████████ | 18/20 [00:44<00:04,  2.12s/it]Computing criterion:  95%|█████████▌| 19/20 [00:46<00:02,  2.08s/it]Computing criterion: 100%|██████████| 20/20 [00:48<00:00,  2.06s/it]Computing criterion: 100%|██████████| 20/20 [00:48<00:00,  2.44s/it]
+No reference models specified, skipping Reference-based attacks
+Computing criterion:   0%|          | 0/20 [00:00<?, ?it/s]Computing criterion:   5%|▌         | 1/20 [00:01<00:35,  1.85s/it]Computing criterion:  10%|█         | 2/20 [00:03<00:34,  1.91s/it]Computing criterion:  15%|█▌        | 3/20 [00:05<00:31,  1.85s/it]Computing criterion:  20%|██        | 4/20 [00:07<00:28,  1.81s/it]Computing criterion:  25%|██▌       | 5/20 [00:08<00:26,  1.75s/it]Computing criterion:  30%|███       | 6/20 [00:10<00:24,  1.75s/it]Computing criterion:  35%|███▌      | 7/20 [00:12<00:22,  1.71s/it]Computing criterion:  40%|████      | 8/20 [00:14<00:20,  1.69s/it]Computing criterion:  45%|████▌     | 9/20 [00:15<00:18,  1.71s/it]Computing criterion:  50%|█████     | 10/20 [00:17<00:17,  1.73s/it]Computing criterion:  55%|█████▌    | 11/20 [00:19<00:15,  1.73s/it]Computing criterion:  60%|██████    | 12/20 [00:21<00:14,  1.79s/it]Computing criterion:  65%|██████▌   | 13/20 [00:22<00:12,  1.75s/it]Computing criterion:  70%|███████   | 14/20 [00:24<00:10,  1.74s/it]Computing criterion:  75%|███████▌  | 15/20 [00:26<00:08,  1.78s/it]Computing criterion:  80%|████████  | 16/20 [00:28<00:07,  1.83s/it]Computing criterion:  85%|████████▌ | 17/20 [00:30<00:05,  1.81s/it]Computing criterion:  90%|█████████ | 18/20 [00:31<00:03,  1.81s/it]Computing criterion:  95%|█████████▌| 19/20 [00:33<00:01,  1.82s/it]Computing criterion: 100%|██████████| 20/20 [00:35<00:00,  1.86s/it]Computing criterion: 100%|██████████| 20/20 [00:35<00:00,  1.79s/it]
+No reference models specified, skipping Reference-based attacks
+AllAttacks.LOSS_threshold ROC AUC: 0.49999999999999994, PR AUC: 0.50025, tpr_at_low_fpr: {0.001: 0.0, 0.01: 0.001}
+AllAttacks.LOSS_threshold roc_auc: 0.500

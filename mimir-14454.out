@@ -1,0 +1,23 @@
+results_new/neo125_github_experiment/EleutherAI_gpt-neo-125m/github_ngram_13_<0.8_truncated
+Saving results to absolute path: /nfs-share/mk2296/projects/llm_memorisation/mia/mimir/tmp_results/neo125_github_experiment/EleutherAI_gpt-neo-125m/github_ngram_13_<0.8_truncated
+LOG: cache_dir is nfs-share/mk2296/llm_memorisation/mia/mimir/cache
+Using cache dir nfs-share/mk2296/llm_memorisation/mia/mimir/cache
+Loading BASE model EleutherAI/gpt-neo-125m...
+MOVING BASE MODEL TO GPU...DONE (2.80s)
+Loading dataset medpaca...
+Loading from HuggingFace!
+Traceback (most recent call last):
+  File "/nfs-share/mk2296/projects/llm_memorisation/mia/mimir/run.py", line 767, in <module>
+    main(config)
+  File "/nfs-share/mk2296/projects/llm_memorisation/mia/mimir/run.py", line 532, in main
+    data_obj_nonmem, data_nonmember = generate_data(
+                                      ^^^^^^^^^^^^^^
+  File "/nfs-share/mk2296/projects/llm_memorisation/mia/mimir/run.py", line 431, in generate_data
+    data = data_obj.load(
+           ^^^^^^^^^^^^^^
+  File "/nfs-share/mk2296/projects/llm_memorisation/mia/mimir/mimir/data_utils.py", line 107, in load
+    data = custom_datasets.load_cached(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/nfs-share/mk2296/projects/llm_memorisation/mia/mimir/mimir/custom_datasets.py", line 57, in load_cached
+    raise ValueError(f"HuggingFace data only available for The Pile.")
+ValueError: HuggingFace data only available for The Pile.
