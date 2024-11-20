@@ -13,6 +13,7 @@ models/*
 *results*/
 neighbor_gen_new/*
 new_neigh_mia/*
+*.out
 
 # Ignore generated data, except gpt paraphrasing scripts
 data/*/
