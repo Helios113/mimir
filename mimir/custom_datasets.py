@@ -10,7 +10,7 @@ from typing import List
 
 SEPARATOR = '<<<SEP>>>'
 
-DATASETS = ['writing', 'english', 'german', 'pubmed', "medpaca"]
+DATASETS = ['writing', 'english', 'german', 'pubmed', "medpaca", "medpaca_nonmember"]
 
 SOURCES_UPLOADED = [
     "arxiv",
@@ -179,6 +179,9 @@ def load_german(cache_dir):
 
 def load_english(cache_dir):
     return load_language('en', cache_dir)
+
+def load_medpaca_nonmember(cache_dir):
+    return datasets.load_dataset("json", data_files="/nfs-share/pa511/llm_memorisation/datasets/medical_dataset/deduplicated_medical_meadow_flashcards_non_member.json", split="train")["text"] 
 
 def load_medpaca(cache_dir):
     return datasets.load_dataset("json", data_files="/nfs-share/pa511/llm_memorisation/datasets/medical_dataset/deduplicated_medical_meadow_flashcards_member.json", split="train")["text"]
