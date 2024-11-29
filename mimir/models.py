@@ -14,6 +14,18 @@ import torch.nn.functional as F
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 # from hf_olmo import *
 
+from peft import (
+    LoraConfig,
+    get_peft_model,
+)
+from peft.utils import prepare_model_for_kbit_training
+import torch
+from omegaconf import DictConfig, OmegaConf
+from transformers import (
+    AutoModelForCausalLM,
+    BitsAndBytesConfig,
+)
+
 from mimir.config import ExperimentConfig
 from mimir.custom_datasets import SEPARATOR
 from mimir.data_utils import drop_last_word
@@ -187,6 +199,12 @@ class Model(nn.Module):
             elif "olmo" in self.name.lower():
                 model = transformers.AutoModelForCausalLM.from_pretrained(
                     self.name, **model_kwargs, trust_remote_code=True, cache_dir=self.cache_dir)
+            elif "local" in self.name.lower():
+                assert self.config.peft_config_path and self.config.peft_model_path, "PEFT config and model paths must be specified in the config"
+                model_loader = LocalPeftModels(
+                     peft_config_path=self.config.peft_config_path,
+                     peft_model_path=self.config.peft_model_path)
+                model = model_loader.load_model()
             else:
                 model = transformers.AutoModelForCausalLM.from_pretrained(
                     self.name, **model_kwargs, device_map=device_map, cache_dir=self.cache_dir)
@@ -212,6 +230,9 @@ class Model(nn.Module):
         elif "pubmedgpt" in self.name:
             tokenizer = transformers.AutoTokenizer.from_pretrained(
                 "stanford-crfm/BioMedLM", **optional_tok_kwargs, cache_dir=self.cache_dir)
+        elif "local" in self.name:
+            tokenizer = transformers.AutoTokenizer.from_pretrained(
+                "gpt2", **optional_tok_kwargs, cache_dir=self.cache_dir)
         else:
             tokenizer = transformers.AutoTokenizer.from_pretrained(
                 self.name, **optional_tok_kwargs, cache_dir=self.cache_dir,
@@ -622,3 +643,57 @@ class OpenAI_APIModel(LanguageModel):
             Get average entropy of each token in the text
         """
         raise NotImplementedError("get_entropy not implemented for OpenAI models")
+
+
+class LocalPeftModels:
+    def __init__(self, peft_config_path: str, peft_model_path: str):
+        self.config_path = peft_config_path
+        self.model_path = peft_model_path
+        self.cfg = OmegaConf.load(peft_config_path)
+
+    def get_model(self):
+        """Load model with appropriate quantization config and
+        other optimizations."""
+
+        use_cuda = torch.cuda.is_available()
+        quantization_config = BitsAndBytesConfig(load_in_4bit=True)
+
+        # instantiate model
+        model_init_kwargs = {
+            "quantization_config": quantization_config,
+            "torch_dtype": torch.bfloat16,
+            "low_cpu_mem_usage": True,
+            "use_cache": False,
+            "trust_remote_code": True,
+        }
+
+        model = AutoModelForCausalLM.from_pretrained(self.cfg.model.name, **model_init_kwargs)
+
+        model = prepare_model_for_kbit_training(
+            model, use_gradient_checkpointing=self.cfg.model.gradient_checkpointing
+        )
+        tm = None
+        if self.cfg.model.lora.target_modules:
+            tm = OmegaConf.to_object(self.cfg.model.lora.target_modules)
+        peft_config = LoraConfig(
+            r=16,
+            lora_alpha=32,
+            lora_dropout=0.05,
+            bias="none",
+            task_type="CAUSAL_LM",
+            target_modules=tm,
+        )
+
+        peft_model = get_peft_model(model, peft_config)
+        if not use_cuda:
+            peft_model.enable_input_require_grads()
+
+        if self.cfg.model.gradient_checkpointing:
+            model.config.use_cache = False
+
+        return peft_model
+
+    def load_model(self):
+        model = self.get_model()
+        model = model.from_pretrained(model, model_id=self.model_path)
+        return model
