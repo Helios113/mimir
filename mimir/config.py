@@ -119,6 +119,10 @@ class ExperimentConfig(Serializable):
     """Name for the experiment"""
     base_model: str
     """Base model name"""
+    peft_model_path: str
+    """Path to target PEFT checkpoint"""
+    peft_config_path: str
+    """Path to PEFT config"""
     dataset_member: str
     """Dataset source for members"""
     dataset_nonmember: str
