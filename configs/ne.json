@@ -8,7 +8,7 @@
     "max_tokens": 512,
     "max_data": 100000,
     "output_name": "unified_mia",
-    "specific_source": "wikipedia_(en)",
+    "specific_source": "Github_ngram_13_<0.8_truncated",
     "n_samples": 1000,
     "blackbox_attacks": [
         "ne"
