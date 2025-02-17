@@ -17,6 +17,7 @@ from transformers import AutoTokenizer, AutoModelForSequenceClassification
 from peft import (
     LoraConfig,
     get_peft_model,
+    PeftModel
 )
 from peft.utils import prepare_model_for_kbit_training
 import torch
@@ -202,7 +203,7 @@ class Model(nn.Module):
             elif "local" in self.name.lower():
                 assert self.config.peft_config_path and self.config.peft_model_path, "PEFT config and model paths must be specified in the config"
                 model_loader = LocalPeftModels(
-                     peft_config_path=self.config.peft_config_path,
+                     peft_base_model=self.config.peft_base_model,
                      peft_model_path=self.config.peft_model_path)
                 model = model_loader.load_model()
             else:
@@ -644,8 +645,36 @@ class OpenAI_APIModel(LanguageModel):
         """
         raise NotImplementedError("get_entropy not implemented for OpenAI models")
 
-
 class LocalPeftModels:
+    def __init__(self, peft_base_model: str, peft_model_path: str):
+        self.peft_base_model = peft_base_model
+        self.peft_model_path = peft_model_path
+        
+    def get_model(self):
+        """Load model with appropriate quantization config and
+        other optimizations."""
+
+        # Define paths
+        base_model_name = "EleutherAI/pythia-125m"  # Ensure this is the correct base model
+        checkpoint_dir = "/nfs-share/mk2296/projects/llm_memorisation/mia/mimir/temp_s3/models/pythia-125m_amazonqa_lora_2pvs5vjk_cent"  # Replace with actual path
+
+        # Load tokenizer
+        tokenizer = AutoTokenizer.from_pretrained(self.peft_base_model)
+
+        # Load base model
+        base_model = AutoModelForCausalLM.from_pretrained(self.peft_base_model, torch_dtype=torch.float16)
+
+        # Load LoRA adapter
+        model = PeftModel.from_pretrained(base_model, self.peft_model_path)
+
+        return model, tokenizer
+
+    def load_model(self):
+        model, tokenizer = self.get_model()
+        return model
+
+
+class LocalPeftModels_old:
     def __init__(self, peft_config_path: str, peft_model_path: str):
         self.config_path = peft_config_path
         self.model_path = peft_model_path
