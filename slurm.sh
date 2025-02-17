@@ -11,7 +11,7 @@
 #source $(poetry env info --path)/bin/activate
 
 export MIMIR_DATA_SOURCE="/nfs-share/mk2296/llm_memorisation/mia/mimir/source"
-export export MIMIR_CACHE_PATH="nfs-share/mk2296/llm_memorisation/mia/mimir/cache"
+export export MIMIR_CACHE_PATH="/nfs-share/mk2296/llm_memorisation/mia/mimir/cache"
 
 export HF_TOKEN=$(cat /nfs-share/mk2296/.huggingface_token)
 
